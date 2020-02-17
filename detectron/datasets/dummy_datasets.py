@@ -24,12 +24,10 @@ from __future__ import unicode_literals
 
 from detectron.utils.collections import AttrDict
 
-from yaml import load
 
 def get_coco_dataset():
     """A dummy COCO dataset that includes only the 'classes' field."""
     ds = AttrDict()
-    '''
     classes = [
         '__background__', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
         'bus', 'train', 'truck', 'boat', 'traffic light', 'fire hydrant',
@@ -45,13 +43,5 @@ def get_coco_dataset():
         'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase',
         'scissors', 'teddy bear', 'hair drier', 'toothbrush'
     ]
-    '''
-    classes = ['__background__']
-    pai_config = {}
-    with open("/data/pai_config.yaml", 'r', encoding = 'utf-8') as pc:
-        pai_config = load(pc.read())
-    pai_config = pai_config['TRAINING_MODEL']['CLASSES']
-    for each_class in pai_config:
-        classes.append(each_class)
     ds.classes = {i: name for i, name in enumerate(classes)}
     return ds
